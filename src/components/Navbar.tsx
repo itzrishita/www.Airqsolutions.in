@@ -28,6 +28,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBrochure, onOpenEstimator 
     { label: 'Iconic Projects', href: '#projects' },
     { label: 'Protocol', href: '#protocol' },
     { label: 'Estimator', href: '#estimator' },
+    { label: 'Social Responsibility', href: '#social-responsibility' },
     { label: 'Contact', href: '#contact' },
   ];
 
@@ -40,19 +41,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBrochure, onOpenEstimator 
           : 'bg-white border-b border-[#c3c6d1] py-4'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
         {/* Brand Logo & Authority */}
-        <a href="#" className="flex items-center group">
+        <a href="#" className="flex items-center group shrink-0">
           <BrandLogo variant="dark" size="md" />
         </a>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center space-x-1">
+        <nav className="hidden lg:flex items-center space-x-0.5 xl:space-x-1">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="px-3 py-2 text-sm font-medium text-[#43474f] hover:text-[#001e40] hover:bg-[#f2f4f6] rounded transition-colors font-display"
+              className="px-2 xl:px-2.5 py-2 text-xs xl:text-sm font-medium text-[#43474f] hover:text-[#001e40] hover:bg-[#f2f4f6] rounded transition-colors font-display whitespace-nowrap"
             >
               {link.label}
             </a>

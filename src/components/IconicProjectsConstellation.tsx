@@ -160,27 +160,41 @@ export const IconicProjectsConstellation: React.FC = () => {
                   <div className="absolute inset-4 rounded-full border border-dashed border-[#006688]/30 pointer-events-none"></div>
                   <div className="absolute inset-16 rounded-full border border-[#c3c6d1] pointer-events-none"></div>
 
-                  {/* Center Core Hub: Active Project Display / Brochure Image Link */}
-                  <div 
+                  {/* Center Core Hub: Active Project Photo / Fallback Display */}
+                  <div
                     onClick={() => setActiveProjectModal(activeHoverNode)}
-                    className="relative z-10 w-48 h-48 sm:w-56 sm:h-56 rounded-full bg-[#001e40] text-white p-4 flex flex-col items-center justify-center text-center shadow-xl border-4 border-white cursor-pointer group hover:scale-105 transition-transform"
+                    title={`${activeHoverNode.name} — Click to inspect details`}
+                    className={`relative z-10 w-48 h-48 sm:w-56 sm:h-56 rounded-full bg-[#001e40] text-white flex flex-col items-center justify-center text-center shadow-xl border-4 border-white cursor-pointer group hover:scale-105 transition-transform overflow-hidden ${
+                      activeHoverNode.imageUrl ? '' : 'p-4'
+                    }`}
                   >
-                    <div className="text-[10px] font-mono-tech uppercase text-[#77d1ff] tracking-widest mb-1">
-                      SITE #{activeHoverNode.id} OF 14
-                    </div>
-                    <div className="font-display font-extrabold text-sm sm:text-base leading-tight text-white line-clamp-2 px-2">
-                      {activeHoverNode.name}
-                    </div>
-                    <div className="text-xs font-mono-tech text-[#c2e8ff] mt-1">
-                      {activeHoverNode.location}
-                    </div>
-                    <div className="mt-2 bg-[#006688] text-white font-mono-tech text-xs px-2.5 py-0.5 rounded font-bold">
-                      {activeHoverNode.capacity}
-                    </div>
-                    <span className="text-[10px] font-mono-tech text-[#77d1ff] mt-2 group-hover:underline flex items-center gap-1">
-                      <span>Inspect Details</span>
-                      <ExternalLink className="w-2.5 h-2.5" />
-                    </span>
+                    {activeHoverNode.imageUrl ? (
+                      <img
+                        key={activeHoverNode.id}
+                        src={activeHoverNode.imageUrl}
+                        alt={activeHoverNode.imageAlt}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    ) : (
+                      <>
+                        <div className="text-[10px] font-mono-tech uppercase text-[#77d1ff] tracking-widest mb-1">
+                          SITE #{activeHoverNode.id} OF 14
+                        </div>
+                        <div className="font-display font-extrabold text-sm sm:text-base leading-tight text-white line-clamp-2 px-2">
+                          {activeHoverNode.name}
+                        </div>
+                        <div className="text-xs font-mono-tech text-[#c2e8ff] mt-1">
+                          {activeHoverNode.location}
+                        </div>
+                        <div className="mt-2 bg-[#006688] text-white font-mono-tech text-xs px-2.5 py-0.5 rounded font-bold">
+                          {activeHoverNode.capacity}
+                        </div>
+                        <span className="text-[10px] font-mono-tech text-[#77d1ff] mt-2 group-hover:underline flex items-center gap-1">
+                          <span>Inspect Details</span>
+                          <ExternalLink className="w-2.5 h-2.5" />
+                        </span>
+                      </>
+                    )}
                   </div>
 
                   {/* 14 Circular Project Nodes positioned radially */}

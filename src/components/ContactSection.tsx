@@ -180,24 +180,30 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialInquiry }
                 {COMPANY_INFO.registeredOffice.address}
               </p>
 
-              <div className="pt-2 border-t border-[#e0e3e5] flex flex-wrap items-center justify-between text-xs font-mono-tech text-[#001e40]">
+              <div className="pt-2 border-t border-[#e0e3e5] flex flex-wrap items-start justify-between text-xs font-mono-tech text-[#001e40]">
                 <span>EAST HOTLINE:</span>
-                <a href={`tel:${COMPANY_INFO.eastPhone}`} className="font-bold text-[#006688] hover:underline">
-                  {COMPANY_INFO.eastPhone}
-                </a>
+                <div className="text-right space-y-1">
+                  <a href={`tel:${COMPANY_INFO.eastPhone}`} className="font-bold text-[#006688] hover:underline block">
+                    {COMPANY_INFO.eastPhone}
+                  </a>
+                  <a href="tel:+918017507442" className="font-bold text-[#006688] hover:underline block">
+                    +91 8017507442
+                  </a>
+                </div>
               </div>
             </div>
 
             {/* Branch Office: West Region (Chhatrapati Sambhajinagar) */}
-            <div className="bg-[#f7f9fb] border border-[#006688] p-6 rounded-sm space-y-3 relative overflow-hidden">
-              <div className="absolute top-0 right-0 bg-[#006688] text-white text-[9px] font-mono-tech px-2.5 py-0.5 uppercase tracking-wider font-bold">
-                NEW EXPANSION
-              </div>
-
-              <div className="flex items-center gap-2">
-                <Building2 className="w-4 h-4 text-[#006688]" />
-                <span className="font-display font-bold text-sm text-[#001e40]">
-                  Dedicated Branch (West Region)
+            <div className="bg-[#f7f9fb] border border-[#c3c6d1] p-6 rounded-sm space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Building2 className="w-4 h-4 text-[#006688]" />
+                  <span className="font-display font-bold text-sm text-[#001e40]">
+                    Dedicated Branch (West Region)
+                  </span>
+                </div>
+                <span className="font-mono-tech text-[10px] bg-white text-[#006688] px-2 py-0.5 rounded border border-[#c3c6d1]">
+                  MAHARASHTRA
                 </span>
               </div>
 

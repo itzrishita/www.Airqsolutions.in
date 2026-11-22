@@ -7,6 +7,7 @@ import { IconicProjectsConstellation } from './components/IconicProjectsConstell
 import { MaharashtraExpansion } from './components/MaharashtraExpansion';
 import { ImplementationProtocol } from './components/ImplementationProtocol';
 import { HvacEstimator } from './components/HvacEstimator';
+import { SocialResponsibility } from './components/SocialResponsibility';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { BrochureViewerModal } from './components/BrochureViewerModal';
@@ -68,7 +69,10 @@ export function App() {
         {/* 7. Interactive HVAC Tonnage & Horsepower Estimator */}
         <HvacEstimator onApplyToInquiry={handleApplyEstimatorToInquiry} />
 
-        {/* 8. Direct Telemetry, Office Locations & Project Consultation */}
+        {/* 8. Our Social Responsibility & Community Initiatives */}
+        <SocialResponsibility />
+
+        {/* 9. Direct Telemetry, Office Locations & Project Consultation */}
         <ContactSection initialInquiry={estimatorInquiryData} />
       </main>
 

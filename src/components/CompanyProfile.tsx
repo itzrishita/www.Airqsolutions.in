@@ -194,28 +194,39 @@ export const CompanyProfile: React.FC = () => {
             {STRENGTHS.map((strength, index) => (
               <div
                 key={strength.id}
-                className="bg-[#f7f9fb] p-6 rounded-lg border border-[#c3c6d1]/80 hover:border-[#006688] hover:shadow-md transition-all flex flex-col justify-between group"
+                className="bg-[#f7f9fb] rounded-lg border border-[#c3c6d1]/80 hover:border-[#006688] hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="p-3 bg-white rounded-md border border-[#c3c6d1] group-hover:border-[#006688] transition-colors shadow-2xs">
-                      {getIcon(strength.iconName)}
+                  {strength.imageUrl && (
+                    <div className="relative h-48 w-full border-b border-[#c3c6d1]/60 overflow-hidden bg-white">
+                      <img
+                        src={strength.imageUrl}
+                        alt={strength.title}
+                        className={`w-full h-full transition-transform duration-300 group-hover:scale-105 ${strength.imageClass || 'object-cover object-center'}`}
+                      />
+                      <span className="absolute top-3 right-3 font-mono-tech font-bold text-xs text-[#001e40] bg-white/95 backdrop-blur-xs px-2.5 py-1 rounded border border-[#c3c6d1] shadow-xs">
+                        0{index + 1}
+                      </span>
                     </div>
-                    <span className="font-mono-tech font-bold text-xs text-[#737780] bg-white px-2.5 py-1 rounded border border-[#c3c6d1]">
-                      0{index + 1}
-                    </span>
+                  )}
+
+                  <div className="p-6 pb-0">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="p-2.5 bg-white rounded-md border border-[#c3c6d1] group-hover:border-[#006688] transition-colors shadow-2xs shrink-0">
+                        {getIcon(strength.iconName)}
+                      </div>
+                      <h4 className="font-display font-bold text-lg text-[#001e40] group-hover:text-[#006688] transition-colors leading-snug">
+                        {strength.title}
+                      </h4>
+                    </div>
+
+                    <p className="font-body text-[#43474f] text-sm leading-relaxed">
+                      {strength.description}
+                    </p>
                   </div>
-
-                  <h4 className="font-display font-bold text-lg text-[#001e40] mb-2 group-hover:text-[#006688] transition-colors">
-                    {strength.title}
-                  </h4>
-
-                  <p className="font-body text-[#43474f] text-sm leading-relaxed">
-                    {strength.description}
-                  </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-[#e0e3e5] flex items-center gap-1.5 text-xs font-mono-tech text-[#006688] font-semibold">
+                <div className="mx-6 mb-6 mt-6 pt-4 border-t border-[#e0e3e5] flex items-center gap-1.5 text-xs font-mono-tech text-[#006688] font-semibold">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                   <span>Verified Project Standard</span>
                 </div>
@@ -223,31 +234,40 @@ export const CompanyProfile: React.FC = () => {
             ))}
 
             {/* Project Sales & Execution Charter Card */}
-            <div className="bg-[#001e40] text-white p-6 rounded-lg border border-[#002b55] flex flex-col justify-between">
+            <div className="bg-[#001e40] text-white rounded-lg border border-[#002b55] flex flex-col justify-between overflow-hidden group">
               <div>
-                <div className="flex items-center justify-between mb-4">
-                  <div className="p-3 bg-[#006688] text-white rounded-md">
-                    <Building className="w-6 h-6" />
-                  </div>
-                  <span className="font-mono-tech font-bold text-xs text-[#77d1ff] bg-white/10 px-2.5 py-1 rounded">
+                <div className="relative h-48 w-full border-b border-white/15 overflow-hidden bg-white">
+                  <img
+                    src="/assets/aistudio/project_sales_and_executive_charter_6304c71e.jpeg"
+                    alt="Project Sales & Execution Charter"
+                    className="w-full h-full object-contain bg-white p-2 transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <span className="absolute top-3 right-3 font-mono-tech font-bold text-xs text-[#77d1ff] bg-[#001e40]/90 backdrop-blur-xs px-2.5 py-1 rounded border border-white/15 shadow-xs">
                     EXECUTION
                   </span>
                 </div>
 
-                <h4 className="font-display font-bold text-lg text-white mb-2">
-                  Project Sales & Execution Charter
-                </h4>
+                <div className="p-6 pb-0">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="p-2.5 bg-[#006688] text-white rounded-md shrink-0">
+                      <Building className="w-6 h-6" />
+                    </div>
+                    <h4 className="font-display font-bold text-lg text-white leading-snug">
+                      Project Sales & Execution Charter
+                    </h4>
+                  </div>
 
-                <p className="font-body text-[#d5e3ff] text-xs leading-relaxed space-y-2">
-                  <span>• Dedicated expert team headed by certified Project Managers handling Ductable, Packaged & VRF installations.</span>
-                  <br />
-                  <span>• World-class site management reducing unnecessary site rework.</span>
-                  <br />
-                  <span>• Immediate mobilization of resources & technical material under instantaneous client demand.</span>
-                </p>
+                  <p className="font-body text-[#d5e3ff] text-xs leading-relaxed space-y-2">
+                    <span>• Dedicated expert team headed by certified Project Managers handling Ductable, Packaged & VRF installations.</span>
+                    <br />
+                    <span>• World-class site management reducing unnecessary site rework.</span>
+                    <br />
+                    <span>• Immediate mobilization of resources & technical material under instantaneous client demand.</span>
+                  </p>
+                </div>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-white/15 text-xs font-mono-tech text-[#77d1ff]">
+              <div className="mx-6 mb-6 mt-6 pt-4 border-t border-white/15 text-xs font-mono-tech text-[#77d1ff]">
                 Kolkata & Maharashtra Operations
               </div>
             </div>

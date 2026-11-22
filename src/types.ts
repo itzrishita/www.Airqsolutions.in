@@ -39,6 +39,8 @@ export interface StrengthItem {
   description: string;
   iconName: string;
   metric?: string;
+  imageUrl?: string;
+  imageClass?: string;
 }
 
 export interface ProtocolStep {

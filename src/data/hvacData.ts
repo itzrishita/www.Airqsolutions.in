@@ -46,6 +46,8 @@ export const STRENGTHS: StrengthItem[] = [
     description: "35+ years of collective experience in the HVAC industry across Sales, Service, Engineering Design & High-Stakes Project Execution.",
     iconName: "Users",
     metric: "35+ Years",
+    imageUrl: "/assets/aistudio/experienced_and_professional_team_2d7eb045.jpeg",
+    imageClass: "object-cover object-[center_55%]",
   },
   {
     id: "infrastructure",
@@ -53,6 +55,8 @@ export const STRENGTHS: StrengthItem[] = [
     description: "Well-equipped infrastructure, certified engineers, factory-trained technicians, advanced diagnostic tools, and genuine OEM spares for rock-solid reliability.",
     iconName: "Wrench",
     metric: "100% Genuine Spares",
+    imageUrl: "/assets/aistudio/strong_technical_infrastructure_64bf8fbd.jpeg",
+    imageClass: "object-cover object-center",
   },
   {
     id: "solutions",
@@ -60,6 +64,8 @@ export const STRENGTHS: StrengthItem[] = [
     description: "From concept thermal mapping, psychrometric design, load calculations to installation, rigorous commissioning, and round-the-clock after-sales service.",
     iconName: "Layers",
     metric: "Turnkey HVAC",
+    imageUrl: "/assets/aistudio/end_to_end_solutions_b28fdb68.jpeg",
+    imageClass: "object-cover object-center",
   },
   {
     id: "customer",
@@ -67,6 +73,8 @@ export const STRENGTHS: StrengthItem[] = [
     description: "Engagement-based methodology ensuring on-time project handover, life-cycle cost effectiveness, and maximum energy efficiency for long-term satisfaction.",
     iconName: "Handshake",
     metric: "99.4% On-Time Delivery",
+    imageUrl: "/assets/aistudio/customer_centric_approach_60d4beb6.jpeg",
+    imageClass: "object-cover object-center",
   },
   {
     id: "pan-india",
@@ -74,6 +82,8 @@ export const STRENGTHS: StrengthItem[] = [
     description: "Proven track record across Government & Private Hospitals, Banks, Universities, Commercial Towers, Defense facilities, and Luxury Hospitality.",
     iconName: "Globe",
     metric: "Pan-India Reach",
+    imageUrl: "/assets/aistudio/pan_india_presence_dd359917.jpeg",
+    imageClass: "object-contain bg-[#091224] p-1.5",
   },
 ];
 
@@ -91,6 +101,7 @@ export const ICONIC_PROJECTS: IconicProject[] = [
     highlights: ["Museum-grade humidity and thermal stabilization", "Multi-zone VRF installation", "Acoustically insulated ducting for auditorium"],
     systemType: "Advanced Variable Refrigerant Flow (VRF)",
     imageAlt: "Bangladesh Bhawan Shantiniketan Bolpur 300 HP",
+    imageUrl: "/assets/aistudio/Bangladesh_bhavan_694badb1.jpeg",
   },
   {
     id: 2,
@@ -104,6 +115,7 @@ export const ICONIC_PROJECTS: IconicProject[] = [
     highlights: ["576 HP central cooling matrix", "Low ambient acoustic dampeners", "High static pressure ducted units"],
     systemType: "Ducted VRF & Package Units",
     imageAlt: "Open Air Theatre Kolkata 576 HP",
+    imageUrl: "/assets/aistudio/Open_air_theatre__Kolkata_a13a0ff4.jpeg",
   },
   {
     id: 3,
@@ -144,6 +156,7 @@ export const ICONIC_PROJECTS: IconicProject[] = [
     highlights: ["1000 HP total cooling load", "Centralized BMS building automation interface", "Staged cooling for lecture halls"],
     systemType: "Modular VRF Network & Centralized Automation",
     imageAlt: "MAKAUT University Kolkata 1000 HP",
+    imageUrl: "/assets/aistudio/MAKAUT_university_ab036647.jpeg",
   },
   {
     id: 6,
@@ -157,6 +170,7 @@ export const ICONIC_PROJECTS: IconicProject[] = [
     highlights: ["Green building certified compliance", "500 HP multi-modular VRF layout", "Optimized fresh air intake systems"],
     systemType: "Commercial VRF & Fresh Air Treated Units",
     imageAlt: "Nabadiganta KMDA Project 500 HP",
+    imageUrl: "/assets/aistudio/Nabadiganta_KMDA_project_d6df1a1e.jpeg",
   },
   {
     id: 7,
@@ -170,6 +184,7 @@ export const ICONIC_PROJECTS: IconicProject[] = [
     highlights: ["HEPA stage air purification", "Isolated pressure cascades for clean zones", "100% duty-standby redundancy in critical wards"],
     systemType: "Cleanroom VRF & Specialized Hospital HVAC",
     imageAlt: "Medical College Kolkata 200 HP",
+    imageUrl: "/assets/aistudio/Medical_college_597b04e2.jpeg",
   },
   {
     id: 8,
@@ -183,6 +198,7 @@ export const ICONIC_PROJECTS: IconicProject[] = [
     highlights: ["High filtration efficiency", "Continuous duty cycle operation", "Micro-climate zoning for sensitive exhibits"],
     systemType: "Package & Ducted Cooling Network",
     imageAlt: "Science City Kolkata 130 HP",
+    imageUrl: "/assets/aistudio/Science_city_e9734fbf.jpeg",
   },
   {
     id: 9,
@@ -196,6 +212,7 @@ export const ICONIC_PROJECTS: IconicProject[] = [
     highlights: ["Laminar airflow integration", "Strict temperature and humidity tolerances", "Medical grade anti-microbial coils"],
     systemType: "Precision Hospital HVAC & Cleanroom Airflow",
     imageAlt: "ESI Hospital Kolkata 90 HP/TR",
+    imageUrl: "/assets/aistudio/ESIC_hospital__Joka_f3f5a099.jpeg",
   },
   {
     id: 10,
@@ -210,6 +227,7 @@ export const ICONIC_PROJECTS: IconicProject[] = [
     highlights: ["588 HP high-reliability installation", "Fire damper & smoke evacuation interlocks", "Heavy duty industrial grade blowers"],
     systemType: "Heavy-Duty Ducted VRF & Industrial Ventilation",
     imageAlt: "Metro Rail Kolkata 588 HP",
+    imageUrl: "/assets/aistudio/Metro_railway_station_6b9ebea9.jpeg",
   },
   {
     id: 11,
@@ -223,6 +241,7 @@ export const ICONIC_PROJECTS: IconicProject[] = [
     highlights: ["High-efficiency water/air cooled chiller system", "Low-noise fan coil units (FCUs)", "Smart guest room energy management link"],
     systemType: "Central Chiller Hydronic System & FCUs",
     imageAlt: "Park Hotel Bangalore Chiller Project",
+    imageUrl: "/assets/aistudio/Hotel_Park__Bangalore_f4558fb4.jpeg",
   },
   {
     id: 12,
@@ -250,6 +269,7 @@ export const ICONIC_PROJECTS: IconicProject[] = [
     highlights: ["Multi-story refrigerant piping design", "Centralized energy monitoring", "High SEER energy efficiency ratings"],
     systemType: "Commercial Multi-Split & VRF Systems",
     imageAlt: "NBCC Bhubaneswar Institutional Project",
+    imageUrl: "/assets/aistudio/NBCC_Bhubaneshwar_908b8344.jpeg",
   },
   {
     id: 14,
@@ -264,6 +284,7 @@ export const ICONIC_PROJECTS: IconicProject[] = [
     highlights: ["450 HP custom airflow distribution", "Specialized stratification cooling for spherical envelope", "Solar-powered thermal load mitigation"],
     systemType: "Custom High-Volume VRF & Precision Jet Nozzle Distribution",
     imageAlt: "Solar Dome New Town Kolkata 450 HP",
+    imageUrl: "/assets/aistudio/Solar_dome_3edd14fe.jpeg",
   }
 ];
 

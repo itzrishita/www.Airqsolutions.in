@@ -27,7 +27,9 @@ export const EquipmentCatalog: React.FC = () => {
       subtitle: "Variable Refrigerant Flow",
       description: "High efficiency, multi-inverter refrigerant systems for superior comfort, individual zoning, and maximum energy savings.",
       icon: <Wind className="w-5 h-5 text-[#006688]" />,
-      stats: "Up to 96 HP modular combination"
+      stats: "Up to 96 HP modular combination",
+      imageUrl: "/assets/aistudio/vrf_systems_6bc0ad21.jpeg",
+      imageClass: "object-cover object-center"
     },
     {
       id: "ductable",
@@ -35,7 +37,9 @@ export const EquipmentCatalog: React.FC = () => {
       subtitle: "Central High Static Cooling",
       description: "Custom engineered ductwork distribution for large commercial complexes, auditoriums, and institutional spaces.",
       icon: <Layers className="w-5 h-5 text-[#006688]" />,
-      stats: "High static pressure up to 250 Pa"
+      stats: "High static pressure up to 250 Pa",
+      imageUrl: "/assets/aistudio/ductable_systems_796e0c15.jpeg",
+      imageClass: "object-contain p-2 bg-white"
     },
     {
       id: "packaged",
@@ -43,7 +47,9 @@ export const EquipmentCatalog: React.FC = () => {
       subtitle: "Heavy Duty Direct Cooling",
       description: "Reliable and robust packaged solutions designed for fast deployment in diverse industrial and commercial applications.",
       icon: <Box className="w-5 h-5 text-[#006688]" />,
-      stats: "Factory-assembled integrity"
+      stats: "Factory-assembled integrity",
+      imageUrl: "/assets/aistudio/packaged_ac_units_47ac2061.jpeg",
+      imageClass: "object-cover object-center"
     },
     {
       id: "service",
@@ -51,7 +57,9 @@ export const EquipmentCatalog: React.FC = () => {
       subtitle: "24/7 OEM Support",
       description: "Prompt, efficient, and professional preventive & breakdown service support with 100% genuine spares across India.",
       icon: <Wrench className="w-5 h-5 text-[#006688]" />,
-      stats: "Guaranteed SLA response times"
+      stats: "Guaranteed SLA response times",
+      imageUrl: "/assets/aistudio/after_sales_service_048e92fc.jpeg",
+      imageClass: "object-cover object-top"
     }
   ];
 
@@ -81,24 +89,33 @@ export const EquipmentCatalog: React.FC = () => {
           {specialisations.map((spec) => (
             <div 
               key={spec.id}
-              className="bg-white border border-[#c3c6d1] p-6 rounded-sm hover:border-[#006688] hover:shadow-md transition-all flex flex-col justify-between"
+              className="bg-white border border-[#c3c6d1] rounded-sm hover:border-[#006688] hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group"
             >
               <div>
-                <div className="w-10 h-10 rounded bg-[#f2f4f6] flex items-center justify-center mb-4 border border-[#c3c6d1]/60">
-                  {spec.icon}
+                <div className="relative h-44 w-full bg-[#f2f4f6] border-b border-[#e0e3e5] overflow-hidden">
+                  <img
+                    src={spec.imageUrl}
+                    alt={spec.title}
+                    className={`w-full h-full transition-transform duration-300 group-hover:scale-105 ${spec.imageClass}`}
+                  />
+                  <div className="absolute bottom-3 left-4 w-9 h-9 rounded bg-white/95 backdrop-blur-sm flex items-center justify-center border border-[#c3c6d1]/80 shadow-sm">
+                    {spec.icon}
+                  </div>
                 </div>
-                <h3 className="font-display font-bold text-lg text-[#001e40] mb-1">
-                  {spec.title}
-                </h3>
-                <div className="font-mono-tech text-xs text-[#006688] font-medium mb-3">
-                  {spec.subtitle}
+                <div className="p-6 pb-0">
+                  <h3 className="font-display font-bold text-lg text-[#001e40] mb-1">
+                    {spec.title}
+                  </h3>
+                  <div className="font-mono-tech text-xs text-[#006688] font-medium mb-3">
+                    {spec.subtitle}
+                  </div>
+                  <p className="font-body text-xs text-[#43474f] leading-relaxed">
+                    {spec.description}
+                  </p>
                 </div>
-                <p className="font-body text-xs text-[#43474f] leading-relaxed">
-                  {spec.description}
-                </p>
               </div>
 
-              <div className="mt-6 pt-3 border-t border-[#e0e3e5] text-[11px] font-mono-tech text-[#001e40] flex items-center gap-1.5">
+              <div className="mx-6 mb-6 mt-6 pt-3 border-t border-[#e0e3e5] text-[11px] font-mono-tech text-[#001e40] flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#006688]"></span>
                 <span>{spec.stats}</span>
               </div>
