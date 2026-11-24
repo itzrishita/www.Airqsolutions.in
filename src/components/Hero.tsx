@@ -1,13 +1,15 @@
 import React from 'react';
+import { PageSection } from '../types';
 import { BROCHURE_IMAGES, COMPANY_INFO } from '../data/hvacData';
 import { AirQWordmark } from './BrandLogo';
 import { MapPin, Building2, ChevronRight, ArrowUpRight, ShieldCheck, Zap, Award } from 'lucide-react';
 
 interface HeroProps {
   onExploreProjects: () => void;
+  onNavigate?: (section: PageSection) => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onExploreProjects }) => {
+export const Hero: React.FC<HeroProps> = ({ onExploreProjects, onNavigate }) => {
   return (
     <section id="hero" className="relative min-h-[92vh] flex items-center pt-28 pb-16 overflow-hidden bg-[#001e40] text-white">
       {/* Background Architectural Photography + Overlay */}
@@ -78,6 +80,12 @@ export const Hero: React.FC<HeroProps> = ({ onExploreProjects }) => {
             <div className="pt-4 flex flex-wrap gap-4 items-center">
               <a
                 href="#contact"
+                onClick={(e) => {
+                  if (onNavigate) {
+                    e.preventDefault();
+                    onNavigate('contact');
+                  }
+                }}
                 className="bg-[#006688] hover:bg-[#004f6b] text-white px-7 py-3.5 rounded text-xs font-mono-tech uppercase tracking-wider font-semibold flex items-center gap-2.5 transition-all shadow-lg hover:shadow-[#006688]/40 hover:-translate-y-0.5"
               >
                 <span>Get in Touch</span>

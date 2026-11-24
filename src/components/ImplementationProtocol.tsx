@@ -1,4 +1,5 @@
 import React from 'react';
+import { PageSection } from '../types';
 import { PROTOCOL_STEPS } from '../data/hvacData';
 import { 
   Compass, 
@@ -10,9 +11,13 @@ import {
   ShieldCheck
 } from 'lucide-react';
 
-export const ImplementationProtocol: React.FC = () => {
+interface ImplementationProtocolProps {
+  onNavigate?: (section: PageSection) => void;
+}
+
+export const ImplementationProtocol: React.FC<ImplementationProtocolProps> = ({ onNavigate }) => {
   return (
-    <section id="protocol" className="py-24 bg-white border-b border-[#c3c6d1]">
+    <section id="protocol" className="pt-28 pb-24 bg-white border-b border-[#c3c6d1]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -91,6 +96,12 @@ export const ImplementationProtocol: React.FC = () => {
 
           <a
             href="#contact"
+            onClick={(e) => {
+              if (onNavigate) {
+                e.preventDefault();
+                onNavigate('contact');
+              }
+            }}
             className="shrink-0 bg-[#006688] hover:bg-[#004f6b] text-white text-xs font-mono-tech uppercase px-6 py-3 rounded font-semibold flex items-center gap-2 transition-colors"
           >
             <span>Request Site Assessment</span>

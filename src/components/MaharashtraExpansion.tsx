@@ -1,10 +1,15 @@
 import React from 'react';
+import { PageSection } from '../types';
 import { COMPANY_INFO } from '../data/hvacData';
 import { MapPin, Phone, Building, Navigation, ArrowRight, ShieldCheck, CheckCircle2, Radio } from 'lucide-react';
 
-export const MaharashtraExpansion: React.FC = () => {
+interface MaharashtraExpansionProps {
+  onNavigate?: (section: PageSection) => void;
+}
+
+export const MaharashtraExpansion: React.FC<MaharashtraExpansionProps> = ({ onNavigate }) => {
   return (
-    <section id="expansion" className="py-24 bg-[#001e40] text-white relative overflow-hidden blueprint-grid border-b border-[#003366]">
+    <section id="expansion" className="pt-28 pb-24 bg-[#001e40] text-white relative overflow-hidden blueprint-grid border-b border-[#003366]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -63,6 +68,12 @@ export const MaharashtraExpansion: React.FC = () => {
             <div className="pt-2 flex flex-wrap items-center gap-4">
               <a
                 href="#contact"
+                onClick={(e) => {
+                  if (onNavigate) {
+                    e.preventDefault();
+                    onNavigate('contact');
+                  }
+                }}
                 className="bg-[#006688] hover:bg-[#004f6b] text-white px-6 py-3.5 rounded text-xs font-mono-tech uppercase tracking-wider font-semibold flex items-center gap-2 transition-all shadow-lg"
               >
                 <span>Connect with West Region Team</span>

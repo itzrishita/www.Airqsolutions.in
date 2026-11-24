@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { EQUIPMENT_CATALOG } from '../data/hvacData';
-import { EquipmentUnit } from '../types';
+import { EquipmentUnit, PageSection } from '../types';
 import { 
   Wind, 
   Layers, 
@@ -16,7 +16,15 @@ import {
   Fan
 } from 'lucide-react';
 
-export const EquipmentCatalog: React.FC = () => {
+interface EquipmentCatalogProps {
+  mode?: 'expertise' | 'equipment' | 'all';
+  onNavigate?: (section: PageSection) => void;
+}
+
+export const EquipmentCatalog: React.FC<EquipmentCatalogProps> = ({
+  mode = 'all',
+  onNavigate,
+}) => {
   const [selectedUnit, setSelectedUnit] = useState<EquipmentUnit>(EQUIPMENT_CATALOG[0]);
   const [activeCategory, setActiveCategory] = useState<'All' | 'Indoor' | 'Outdoor'>('All');
 
@@ -67,73 +75,98 @@ export const EquipmentCatalog: React.FC = () => {
     ? EQUIPMENT_CATALOG 
     : EQUIPMENT_CATALOG.filter(u => u.type === activeCategory);
 
+  const showExpertise = mode === 'all' || mode === 'expertise';
+  const showEquipment = mode === 'all' || mode === 'equipment';
+
   return (
-    <section id="expertise" className="py-24 bg-[#f7f9fb] border-b border-[#c3c6d1]">
+    <section
+      id={mode === 'equipment' ? 'equipment' : 'expertise'}
+      className="pt-28 pb-24 bg-[#f7f9fb] border-b border-[#c3c6d1]"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
-        <div className="border-l-2 border-[#006688] pl-4 sm:pl-6 mb-16">
-          <div className="text-xs font-mono-tech uppercase tracking-widest text-[#006688] mb-1 font-semibold">
-            ENGINEERING SPECIALISATION & SYSTEMS
-          </div>
-          <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-[#001e40] tracking-tight">
-            HVAC Product & Solutions Range
-          </h2>
-          <p className="font-body text-[#43474f] text-base sm:text-lg max-w-3xl mt-2">
-            Engineered equipment portfolio spanning VRF outdoor units, comprehensive indoor configurations, ducted matrices, and dedicated after-sales service.
-          </p>
-        </div>
+        {showExpertise && (
+          <>
+            {/* Section Header */}
+            <div className="border-l-2 border-[#006688] pl-4 sm:pl-6 mb-16">
+              <div className="text-xs font-mono-tech uppercase tracking-widest text-[#006688] mb-1 font-semibold">
+                ENGINEERING SPECIALISATION & SYSTEMS
+              </div>
+              <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-[#001e40] tracking-tight">
+                HVAC Product & Solutions Range
+              </h2>
+              <p className="font-body text-[#43474f] text-base sm:text-lg max-w-3xl mt-2">
+                Engineered equipment portfolio spanning VRF outdoor units, comprehensive indoor configurations, ducted matrices, and dedicated after-sales service.
+              </p>
+            </div>
 
-        {/* 4 Core Specialisation Cards (From Brochure Page 1) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
-          {specialisations.map((spec) => (
-            <div 
-              key={spec.id}
-              className="bg-white border border-[#c3c6d1] rounded-sm hover:border-[#006688] hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group"
-            >
+            {/* 4 Core Specialisation Cards (From Brochure Page 1) */}
+            <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ${mode === 'all' ? 'mb-20' : ''}`}>
+              {specialisations.map((spec) => (
+                <div 
+                  key={spec.id}
+                  className="bg-white border border-[#c3c6d1] rounded-sm hover:border-[#006688] hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group"
+                >
+                  <div>
+                    <div className="relative h-44 w-full bg-[#f2f4f6] border-b border-[#e0e3e5] overflow-hidden">
+                      <img
+                        src={spec.imageUrl}
+                        alt={spec.title}
+                        className={`w-full h-full transition-transform duration-300 group-hover:scale-105 ${spec.imageClass}`}
+                      />
+                      <div className="absolute bottom-3 left-4 w-9 h-9 rounded bg-white/95 backdrop-blur-sm flex items-center justify-center border border-[#c3c6d1]/80 shadow-sm">
+                        {spec.icon}
+                      </div>
+                    </div>
+                    <div className="p-6 pb-0">
+                      <h3 className="font-display font-bold text-lg text-[#001e40] mb-1">
+                        {spec.title}
+                      </h3>
+                      <div className="font-mono-tech text-xs text-[#006688] font-medium mb-3">
+                        {spec.subtitle}
+                      </div>
+                      <p className="font-body text-xs text-[#43474f] leading-relaxed">
+                        {spec.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="mx-6 mb-6 mt-6 pt-3 border-t border-[#e0e3e5] text-[11px] font-mono-tech text-[#001e40] flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#006688]"></span>
+                    <span>{spec.stats}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
+        {showEquipment && (
+          /* Interactive Equipment Range Showcase */
+          <div id={mode === 'all' ? 'equipment' : undefined} className={mode === 'all' ? 'pt-4' : ''}>
+            {mode === 'equipment' && (
+              <div className="border-l-2 border-[#006688] pl-4 sm:pl-6 mb-10">
+                <div className="text-xs font-mono-tech uppercase tracking-widest text-[#006688] mb-1 font-semibold">
+                  TECHNICAL HARDWARE CATALOG
+                </div>
+                <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-[#001e40] tracking-tight">
+                  VRF Indoor &amp; Outdoor Range
+                </h2>
+                <p className="font-body text-[#43474f] text-base sm:text-lg max-w-3xl mt-2">
+                  Inspect technical capacity, acoustic performance, airflow curves, and deployment recommendations for our authorized Carrier &amp; Hitachi equipment lineup.
+                </p>
+              </div>
+            )}
+
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-[#c3c6d1]">
               <div>
-                <div className="relative h-44 w-full bg-[#f2f4f6] border-b border-[#e0e3e5] overflow-hidden">
-                  <img
-                    src={spec.imageUrl}
-                    alt={spec.title}
-                    className={`w-full h-full transition-transform duration-300 group-hover:scale-105 ${spec.imageClass}`}
-                  />
-                  <div className="absolute bottom-3 left-4 w-9 h-9 rounded bg-white/95 backdrop-blur-sm flex items-center justify-center border border-[#c3c6d1]/80 shadow-sm">
-                    {spec.icon}
-                  </div>
+                <div className="text-xs font-mono-tech uppercase text-[#006688] font-bold">
+                  EQUIPMENT SPECIFICATION BROWSER
                 </div>
-                <div className="p-6 pb-0">
-                  <h3 className="font-display font-bold text-lg text-[#001e40] mb-1">
-                    {spec.title}
-                  </h3>
-                  <div className="font-mono-tech text-xs text-[#006688] font-medium mb-3">
-                    {spec.subtitle}
-                  </div>
-                  <p className="font-body text-xs text-[#43474f] leading-relaxed">
-                    {spec.description}
-                  </p>
-                </div>
+                <h3 className="font-display font-bold text-2xl text-[#001e40]">
+                  VRF Indoor & Outdoor Range
+                </h3>
               </div>
-
-              <div className="mx-6 mb-6 mt-6 pt-3 border-t border-[#e0e3e5] text-[11px] font-mono-tech text-[#001e40] flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#006688]"></span>
-                <span>{spec.stats}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Interactive Equipment Range Showcase */}
-        <div id="equipment" className="pt-4">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-[#c3c6d1]">
-            <div>
-              <div className="text-xs font-mono-tech uppercase text-[#006688] font-bold">
-                EQUIPMENT SPECIFICATION BROWSER
-              </div>
-              <h3 className="font-display font-bold text-2xl text-[#001e40]">
-                VRF Indoor & Outdoor Range
-              </h3>
-            </div>
 
             {/* Filter Pills */}
             <div className="flex items-center gap-2 mt-4 md:mt-0">
@@ -302,6 +335,12 @@ export const EquipmentCatalog: React.FC = () => {
                 <div className="pt-2 flex justify-end">
                   <a
                     href="#contact"
+                    onClick={(e) => {
+                      if (onNavigate) {
+                        e.preventDefault();
+                        onNavigate('contact');
+                      }
+                    }}
                     className="inline-flex items-center gap-2 text-xs font-mono-tech uppercase tracking-wider bg-[#001e40] text-white px-5 py-2.5 rounded hover:bg-[#006688] transition-colors"
                   >
                     <span>Request Engineering Sizing for {selectedUnit.name}</span>
@@ -314,6 +353,7 @@ export const EquipmentCatalog: React.FC = () => {
 
           </div>
         </div>
+        )}
 
       </div>
     </section>

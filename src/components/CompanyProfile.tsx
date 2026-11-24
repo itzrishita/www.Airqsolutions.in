@@ -1,4 +1,5 @@
 import React from 'react';
+import { PageSection } from '../types';
 import { STRENGTHS, COMPANY_INFO } from '../data/hvacData';
 import { AirQWordmark } from './BrandLogo';
 import { 
@@ -16,7 +17,11 @@ import {
   Gauge
 } from 'lucide-react';
 
-export const CompanyProfile: React.FC = () => {
+interface CompanyProfileProps {
+  onNavigate?: (section: PageSection) => void;
+}
+
+export const CompanyProfile: React.FC<CompanyProfileProps> = ({ onNavigate }) => {
   const getIcon = (name: string) => {
     switch (name) {
       case 'Users': return <Users className="w-6 h-6 text-[#006688]" />;
@@ -29,7 +34,7 @@ export const CompanyProfile: React.FC = () => {
   };
 
   return (
-    <section id="about" className="py-24 bg-white border-b border-[#c3c6d1]/60">
+    <section id="about" className="pt-28 pb-24 bg-white border-b border-[#c3c6d1]/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header with Left Vertical Anchor Line */}
@@ -147,7 +152,13 @@ export const CompanyProfile: React.FC = () => {
 
                 <div className="pt-4">
                   <a
-                    href="#quote"
+                    href="#contact"
+                    onClick={(e) => {
+                      if (onNavigate) {
+                        e.preventDefault();
+                        onNavigate('contact');
+                      }
+                    }}
                     className="inline-flex items-center gap-2 px-4 py-2 bg-[#006688] hover:bg-[#004f6b] text-white text-xs font-mono-tech uppercase font-bold rounded transition-colors"
                   >
                     <span>Request VRF Engineering Assessment</span>

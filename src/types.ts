@@ -1,3 +1,15 @@
+export type PageSection =
+  | 'hero'
+  | 'about'
+  | 'expertise'
+  | 'equipment'
+  | 'projects'
+  | 'expansion'
+  | 'protocol'
+  | 'estimator'
+  | 'social-responsibility'
+  | 'contact';
+
 export type ProjectCategory = 'All' | 'Education & Culture' | 'Healthcare' | 'Commercial & Hospitality' | 'Infrastructure & Transit' | 'Government & Landmark';
 
 export interface IconicProject {

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { PageSection } from './types';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { CompanyProfile } from './components/CompanyProfile';
@@ -12,7 +13,43 @@ import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { BrochureViewerModal } from './components/BrochureViewerModal';
 
+const VALID_SECTIONS: PageSection[] = [
+  'hero',
+  'about',
+  'expertise',
+  'equipment',
+  'projects',
+  'expansion',
+  'protocol',
+  'estimator',
+  'social-responsibility',
+  'contact',
+];
+
+function resolveSectionFromHash(hash: string): { section: PageSection; subAnchor?: string } {
+  const cleaned = hash.replace(/^#/, '').trim();
+  if (!cleaned || cleaned === 'hero') {
+    return { section: 'hero' };
+  }
+  if (cleaned === 'kolkata-hq') {
+    return { section: 'contact', subAnchor: 'kolkata-hq' };
+  }
+  if (cleaned === 'quote') {
+    return { section: 'contact' };
+  }
+  if (VALID_SECTIONS.includes(cleaned as PageSection)) {
+    return { section: cleaned as PageSection };
+  }
+  return { section: 'hero' };
+}
+
 export function App() {
+  const [activeSection, setActiveSection] = useState<PageSection>(() => {
+    if (typeof window !== 'undefined') {
+      return resolveSectionFromHash(window.location.hash).section;
+    }
+    return 'hero';
+  });
   const [isBrochureOpen, setIsBrochureOpen] = useState(false);
   const [estimatorInquiryData, setEstimatorInquiryData] = useState<{
     area?: number;
@@ -21,11 +58,48 @@ export function App() {
     estimatedHP?: number;
   } | null>(null);
 
-  const handleExploreProjects = () => {
-    const projectsEl = document.getElementById('projects');
-    if (projectsEl) {
-      projectsEl.scrollIntoView({ behavior: 'smooth' });
+  const navigateToSection = useCallback((section: PageSection, subAnchor?: string) => {
+    setActiveSection(section);
+
+    if (typeof window !== 'undefined') {
+      const targetHash = subAnchor ? `#${subAnchor}` : section === 'hero' ? '#hero' : `#${section}`;
+      if (window.location.hash !== targetHash) {
+        window.history.replaceState(null, '', targetHash);
+      }
+
+      if (subAnchor) {
+        window.setTimeout(() => {
+          const el = document.getElementById(subAnchor);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 60);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      }
     }
+  }, []);
+
+  useEffect(() => {
+    const onHashChange = () => {
+      const resolved = resolveSectionFromHash(window.location.hash);
+      setActiveSection(resolved.section);
+      if (resolved.subAnchor) {
+        window.setTimeout(() => {
+          const el = document.getElementById(resolved.subAnchor!);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 60);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      }
+    };
+
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, []);
+
+  const handleExploreProjects = () => {
+    navigateToSection('projects');
   };
 
   const handleApplyEstimatorToInquiry = (data: {
@@ -35,49 +109,66 @@ export function App() {
     estimatedHP: number;
   }) => {
     setEstimatorInquiryData(data);
+    navigateToSection('contact');
   };
 
   return (
     <div className="min-h-screen bg-[#f7f9fb] text-[#191c1e] flex flex-col selection:bg-[#006688] selection:text-white">
       {/* Top Authoritative Navigation */}
-      <Navbar 
-        onOpenBrochure={() => setIsBrochureOpen(true)} 
+      <Navbar
+        activeSection={activeSection}
+        onNavigate={navigateToSection}
+        onOpenBrochure={() => setIsBrochureOpen(true)}
       />
 
-      {/* Main Engineering Sections */}
+      {/* Single Active View Section */}
       <main className="flex-1">
-        {/* 1. Hero Showcase */}
-        <Hero 
-          onExploreProjects={handleExploreProjects}
-        />
+        {activeSection === 'hero' && (
+          <Hero
+            onExploreProjects={handleExploreProjects}
+            onNavigate={navigateToSection}
+          />
+        )}
 
-        {/* 2. Corporate Overview, Authorized Brands & 5 Core Strengths */}
-        <CompanyProfile />
+        {activeSection === 'about' && (
+          <CompanyProfile onNavigate={navigateToSection} />
+        )}
 
-        {/* 3. HVAC Equipment Systems & VRF Technical Catalog */}
-        <EquipmentCatalog />
+        {activeSection === 'expertise' && (
+          <EquipmentCatalog mode="expertise" onNavigate={navigateToSection} />
+        )}
 
-        {/* 4. Glimpse of 14 Iconic Projects (Constellation Orbit & Grid) */}
-        <IconicProjectsConstellation />
+        {activeSection === 'equipment' && (
+          <EquipmentCatalog mode="equipment" onNavigate={navigateToSection} />
+        )}
 
-        {/* 5. Maharashtra Expansion (Chhatrapati Sambhajinagar Branch) */}
-        <MaharashtraExpansion />
+        {activeSection === 'projects' && (
+          <IconicProjectsConstellation onNavigate={navigateToSection} />
+        )}
 
-        {/* 6. 4-Stage Implementation Protocol & Quality Management */}
-        <ImplementationProtocol />
+        {activeSection === 'expansion' && (
+          <MaharashtraExpansion onNavigate={navigateToSection} />
+        )}
 
-        {/* 7. Interactive HVAC Tonnage & Horsepower Estimator */}
-        <HvacEstimator onApplyToInquiry={handleApplyEstimatorToInquiry} />
+        {activeSection === 'protocol' && (
+          <ImplementationProtocol onNavigate={navigateToSection} />
+        )}
 
-        {/* 8. Our Social Responsibility & Community Initiatives */}
-        <SocialResponsibility />
+        {activeSection === 'estimator' && (
+          <HvacEstimator onApplyToInquiry={handleApplyEstimatorToInquiry} />
+        )}
 
-        {/* 9. Direct Telemetry, Office Locations & Project Consultation */}
-        <ContactSection initialInquiry={estimatorInquiryData} />
+        {activeSection === 'social-responsibility' && (
+          <SocialResponsibility />
+        )}
+
+        {activeSection === 'contact' && (
+          <ContactSection initialInquiry={estimatorInquiryData} />
+        )}
       </main>
 
       {/* Authoritative Global Footer */}
-      <Footer />
+      <Footer onNavigate={navigateToSection} />
 
       {/* High-Resolution Brochure Viewer Modal */}
       <BrochureViewerModal

@@ -40,7 +40,7 @@ export const SocialResponsibility: React.FC = () => {
   return (
     <section
       id="social-responsibility"
-      className="scroll-mt-24 py-24 bg-[#f2f6f9] border-b border-[#c3c6d1]"
+      className="scroll-mt-24 pt-28 pb-24 bg-[#f2f6f9] border-b border-[#c3c6d1]"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}

@@ -99,7 +99,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialInquiry }
   };
 
   return (
-    <section id="contact" className="py-24 bg-white border-b border-[#c3c6d1]">
+    <section id="contact" className="pt-28 pb-24 bg-white border-b border-[#c3c6d1]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -164,14 +164,29 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialInquiry }
 
             {/* Registered Office: East Region HQ */}
             <div id="kolkata-hq" className="scroll-mt-28 bg-[#f7f9fb] border border-[#c3c6d1] p-6 rounded-sm space-y-3">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
-                  <Building2 className="w-4 h-4 text-[#006688]" />
-                  <span className="font-display font-bold text-sm text-[#001e40]">
-                    Registered Office (East Region HQ)
-                  </span>
+                  <Building2 className="w-4 h-4 text-[#006688] shrink-0" />
+                  <div className="relative group/loc inline-block">
+                    <a
+                      href="https://maps.app.goo.gl/sN62tVW1VJmqoip2A"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title="For location, click here."
+                      className="font-display font-bold text-sm text-[#001e40] hover:text-[#006688] underline decoration-[#006688]/40 underline-offset-4 hover:decoration-[#006688] inline-flex items-center gap-1.5 transition-colors"
+                    >
+                      <span>Registered Office (East Region HQ)</span>
+                      <MapPin className="w-3.5 h-3.5 text-[#006688] shrink-0" />
+                    </a>
+                    <span
+                      role="tooltip"
+                      className="pointer-events-none absolute left-0 bottom-full mb-2 whitespace-nowrap bg-[#001e40] text-white text-[11px] font-mono-tech px-2.5 py-1 rounded shadow-lg opacity-0 translate-y-1 group-hover/loc:opacity-100 group-hover/loc:translate-y-0 transition-all z-20 border border-white/15"
+                    >
+                      For location, click here.
+                    </span>
+                  </div>
                 </div>
-                <span className="font-mono-tech text-[10px] bg-white text-[#006688] px-2 py-0.5 rounded border border-[#c3c6d1]">
+                <span className="font-mono-tech text-[10px] bg-white text-[#006688] px-2 py-0.5 rounded border border-[#c3c6d1] shrink-0">
                   WEST BENGAL
                 </span>
               </div>
@@ -195,14 +210,29 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialInquiry }
 
             {/* Branch Office: West Region (Chhatrapati Sambhajinagar) */}
             <div className="bg-[#f7f9fb] border border-[#c3c6d1] p-6 rounded-sm space-y-3">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
-                  <Building2 className="w-4 h-4 text-[#006688]" />
-                  <span className="font-display font-bold text-sm text-[#001e40]">
-                    Dedicated Branch (West Region)
-                  </span>
+                  <Building2 className="w-4 h-4 text-[#006688] shrink-0" />
+                  <div className="relative group/loc inline-block">
+                    <a
+                      href="https://maps.app.goo.gl/BgmPxbqGgcvBFWdQ9"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title="For location, click here."
+                      className="font-display font-bold text-sm text-[#001e40] hover:text-[#006688] underline decoration-[#006688]/40 underline-offset-4 hover:decoration-[#006688] inline-flex items-center gap-1.5 transition-colors"
+                    >
+                      <span>Dedicated Branch (West Region)</span>
+                      <MapPin className="w-3.5 h-3.5 text-[#006688] shrink-0" />
+                    </a>
+                    <span
+                      role="tooltip"
+                      className="pointer-events-none absolute left-0 bottom-full mb-2 whitespace-nowrap bg-[#001e40] text-white text-[11px] font-mono-tech px-2.5 py-1 rounded shadow-lg opacity-0 translate-y-1 group-hover/loc:opacity-100 group-hover/loc:translate-y-0 transition-all z-20 border border-white/15"
+                    >
+                      For location, click here.
+                    </span>
+                  </div>
                 </div>
-                <span className="font-mono-tech text-[10px] bg-white text-[#006688] px-2 py-0.5 rounded border border-[#c3c6d1]">
+                <span className="font-mono-tech text-[10px] bg-white text-[#006688] px-2 py-0.5 rounded border border-[#c3c6d1] shrink-0">
                   MAHARASHTRA
                 </span>
               </div>

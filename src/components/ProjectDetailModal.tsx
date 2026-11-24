@@ -1,14 +1,15 @@
 import React from 'react';
-import { IconicProject } from '../types';
+import { IconicProject, PageSection } from '../types';
 import { AirQWordmark } from './BrandLogo';
 import { X, MapPin, Zap, Building, CheckCircle2, Phone, ArrowRight } from 'lucide-react';
 
 interface ProjectDetailModalProps {
   project: IconicProject | null;
   onClose: () => void;
+  onNavigate?: (section: PageSection) => void;
 }
 
-export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project, onClose }) => {
+export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project, onClose, onNavigate }) => {
   if (!project) return null;
 
   return (
@@ -109,7 +110,13 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
               </button>
               <a
                 href="#contact"
-                onClick={onClose}
+                onClick={(e) => {
+                  onClose();
+                  if (onNavigate) {
+                    e.preventDefault();
+                    onNavigate('contact');
+                  }
+                }}
                 className="px-4 py-2 text-xs font-mono-tech uppercase bg-[#001e40] text-white rounded hover:bg-[#006688] flex items-center gap-1.5"
               >
                 <span>Consult on Similar Project</span>

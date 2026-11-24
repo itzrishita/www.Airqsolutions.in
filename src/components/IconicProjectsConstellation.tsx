@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ICONIC_PROJECTS, BROCHURE_IMAGES } from '../data/hvacData';
-import { IconicProject, ProjectCategory } from '../types';
+import { IconicProject, ProjectCategory, PageSection } from '../types';
 import { ProjectDetailModal } from './ProjectDetailModal';
 import { 
   Building2, 
@@ -21,7 +21,11 @@ import {
   Filter
 } from 'lucide-react';
 
-export const IconicProjectsConstellation: React.FC = () => {
+interface IconicProjectsConstellationProps {
+  onNavigate?: (section: PageSection) => void;
+}
+
+export const IconicProjectsConstellation: React.FC<IconicProjectsConstellationProps> = ({ onNavigate }) => {
   const [viewMode, setViewMode] = useState<'constellation' | 'grid'>('constellation');
   const [selectedCategory, setSelectedCategory] = useState<ProjectCategory>('All');
   const [searchQuery, setSearchQuery] = useState('');
@@ -58,7 +62,7 @@ export const IconicProjectsConstellation: React.FC = () => {
   });
 
   return (
-    <section id="projects" className="py-24 bg-white border-b border-[#c3c6d1]">
+    <section id="projects" className="pt-28 pb-24 bg-white border-b border-[#c3c6d1]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -380,6 +384,7 @@ export const IconicProjectsConstellation: React.FC = () => {
       <ProjectDetailModal
         project={activeProjectModal}
         onClose={() => setActiveProjectModal(null)}
+        onNavigate={onNavigate}
       />
     </section>
   );

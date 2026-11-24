@@ -65,7 +65,7 @@ export const HvacEstimator: React.FC<EstimatorProps> = ({ onApplyToInquiry }) =>
   };
 
   return (
-    <section id="estimator" className="py-24 bg-[#f7f9fb] border-b border-[#c3c6d1]">
+    <section id="estimator" className="pt-28 pb-24 bg-[#f7f9fb] border-b border-[#c3c6d1]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

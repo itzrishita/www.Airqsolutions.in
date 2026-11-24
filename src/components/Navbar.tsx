@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { COMPANY_INFO } from '../data/hvacData';
+import { PageSection } from '../types';
 import { BrandLogo } from './BrandLogo';
-import { Menu, X, Phone, FileText, ArrowRight, ShieldCheck, MapPin, Building2, ChevronDown } from 'lucide-react';
+import { Menu, X, Phone, FileText, MapPin, Building2, ChevronDown } from 'lucide-react';
 
 interface NavbarProps {
+  activeSection: PageSection;
+  onNavigate: (section: PageSection, subAnchor?: string) => void;
   onOpenBrochure: () => void;
-  onOpenEstimator?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenBrochure, onOpenEstimator }) => {
+export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate, onOpenBrochure }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [branchesOpen, setBranchesOpen] = useState(false);
@@ -21,16 +22,27 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBrochure, onOpenEstimator 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { label: 'About', href: '#about' },
-    { label: 'Expertise', href: '#expertise' },
-    { label: 'Equipment', href: '#equipment' },
-    { label: 'Iconic Projects', href: '#projects' },
-    { label: 'Protocol', href: '#protocol' },
-    { label: 'Estimator', href: '#estimator' },
-    { label: 'Social Responsibility', href: '#social-responsibility' },
-    { label: 'Contact', href: '#contact' },
+  const navLinks: { label: string; section: PageSection; href: string }[] = [
+    { label: 'About', section: 'about', href: '#about' },
+    { label: 'Expertise', section: 'expertise', href: '#expertise' },
+    { label: 'Equipment', section: 'equipment', href: '#equipment' },
+    { label: 'Iconic Projects', section: 'projects', href: '#projects' },
+    { label: 'Protocol', section: 'protocol', href: '#protocol' },
+    { label: 'Estimator', section: 'estimator', href: '#estimator' },
+    { label: 'Social Responsibility', section: 'social-responsibility', href: '#social-responsibility' },
+    { label: 'Contact', section: 'contact', href: '#contact' },
   ];
+
+  const handleLinkClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    section: PageSection,
+    subAnchor?: string
+  ) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    setBranchesOpen(false);
+    onNavigate(section, subAnchor);
+  };
 
   return (
     <header 
@@ -42,22 +54,35 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBrochure, onOpenEstimator 
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
-        {/* Brand Logo & Authority */}
-        <a href="#" className="flex items-center group shrink-0">
+        {/* Brand Logo & Authority (returns to Hero Home view) */}
+        <a
+          href="#hero"
+          onClick={(e) => handleLinkClick(e, 'hero')}
+          className="flex items-center group shrink-0"
+        >
           <BrandLogo variant="dark" size="md" />
         </a>
 
         {/* Desktop Navigation Links */}
         <nav className="hidden lg:flex items-center space-x-0.5 xl:space-x-1">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="px-2 xl:px-2.5 py-2 text-xs xl:text-sm font-medium text-[#43474f] hover:text-[#001e40] hover:bg-[#f2f4f6] rounded transition-colors font-display whitespace-nowrap"
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.section;
+            return (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={(e) => handleLinkClick(e, link.section)}
+                aria-current={isActive ? 'page' : undefined}
+                className={`px-2 xl:px-2.5 py-2 text-xs xl:text-sm font-medium rounded transition-colors font-display whitespace-nowrap ${
+                  isActive
+                    ? 'bg-[#001e40] text-white font-semibold shadow-xs'
+                    : 'text-[#43474f] hover:text-[#001e40] hover:bg-[#f2f4f6]'
+                }`}
+              >
+                {link.label}
+              </a>
+            );
+          })}
         </nav>
 
         {/* Action Controls */}
@@ -103,7 +128,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBrochure, onOpenEstimator 
                   <div className="p-1.5 space-y-1">
                     <a
                       href="#kolkata-hq"
-                      onClick={() => setBranchesOpen(false)}
+                      onClick={(e) => handleLinkClick(e, 'contact', 'kolkata-hq')}
                       className="w-full flex items-start gap-3 p-2.5 rounded hover:bg-[#f0f7fa] border border-transparent hover:border-[#006688]/25 transition-colors group"
                     >
                       <div className="p-1.5 rounded bg-[#001e40] text-[#77d1ff] shrink-0 mt-0.5">
@@ -126,7 +151,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBrochure, onOpenEstimator 
 
                     <a
                       href="#expansion"
-                      onClick={() => setBranchesOpen(false)}
+                      onClick={(e) => handleLinkClick(e, 'expansion')}
                       className="w-full flex items-start gap-3 p-2.5 rounded hover:bg-[#f0f7fa] border border-transparent hover:border-[#006688]/25 transition-colors group"
                     >
                       <div className="p-1.5 rounded bg-[#006688] text-white shrink-0 mt-0.5">
@@ -187,23 +212,31 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBrochure, onOpenEstimator 
           </div>
 
           <div className="grid grid-cols-2 gap-2">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="px-3 py-2.5 text-sm font-medium text-[#191c1e] bg-[#f7f9fb] hover:bg-[#e0e3e5] rounded border border-[#c3c6d1]/40 font-display"
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.section;
+              return (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={(e) => handleLinkClick(e, link.section)}
+                  aria-current={isActive ? 'page' : undefined}
+                  className={`px-3 py-2.5 text-sm font-medium rounded border font-display transition-colors ${
+                    isActive
+                      ? 'bg-[#001e40] text-white border-[#001e40] font-semibold'
+                      : 'text-[#191c1e] bg-[#f7f9fb] hover:bg-[#e0e3e5] border-[#c3c6d1]/40'
+                  }`}
+                >
+                  {link.label}
+                </a>
+              );
+            })}
           </div>
 
           <div className="pt-2 flex flex-col gap-2">
             <div className="grid grid-cols-2 gap-2">
               <a
                 href="#kolkata-hq"
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={(e) => handleLinkClick(e, 'contact', 'kolkata-hq')}
                 className="flex items-center justify-center gap-1.5 bg-[#001e40] text-white py-2.5 px-3 rounded text-xs font-mono-tech font-semibold"
               >
                 <Building2 className="w-3.5 h-3.5 text-[#77d1ff]" />
@@ -211,7 +244,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBrochure, onOpenEstimator 
               </a>
               <a
                 href="#expansion"
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={(e) => handleLinkClick(e, 'expansion')}
                 className="flex items-center justify-center gap-1.5 bg-[#006688] text-white py-2.5 px-3 rounded text-xs font-mono-tech font-semibold"
               >
                 <MapPin className="w-3.5 h-3.5 text-[#77d1ff]" />

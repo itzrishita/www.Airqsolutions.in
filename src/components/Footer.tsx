@@ -1,9 +1,14 @@
 import React from 'react';
+import { PageSection } from '../types';
 import { COMPANY_INFO } from '../data/hvacData';
 import { BrandLogo, AirQWordmark } from './BrandLogo';
 import { Phone, Mail, MapPin, Building, ShieldCheck, ArrowUp } from 'lucide-react';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onNavigate?: (section: PageSection) => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -47,8 +52,8 @@ export const Footer: React.FC = () => {
               <a href="tel:+919830079309" className="text-white hover:text-[#77d1ff] block font-bold">
                 +91 9830079309
               </a>
-              <a href="tel:+918696911863" className="text-[#77d1ff] hover:underline block">
-                +91 8696911863 (Direct)
+              <a href="tel:+918017507442" className="text-[#77d1ff] hover:underline block">
+                +91 8017507442 (Direct)
               </a>
             </div>
           </div>
@@ -70,7 +75,6 @@ export const Footer: React.FC = () => {
               <a href="tel:+918696911863" className="text-white hover:text-[#77d1ff] block font-bold">
                 +91 8696911863
               </a>
-              <span className="text-[10px] text-white/50">Coordinates: 19.8762° N, 75.3433° E</span>
             </div>
           </div>
 
@@ -107,10 +111,28 @@ export const Footer: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-6">
-            <a href="#about" className="hover:text-white">
+            <a
+              href="#about"
+              onClick={(e) => {
+                if (onNavigate) {
+                  e.preventDefault();
+                  onNavigate('about');
+                }
+              }}
+              className="hover:text-white"
+            >
               About Profile
             </a>
-            <a href="#projects" className="hover:text-white">
+            <a
+              href="#projects"
+              onClick={(e) => {
+                if (onNavigate) {
+                  e.preventDefault();
+                  onNavigate('projects');
+                }
+              }}
+              className="hover:text-white"
+            >
               14 Iconic Projects
             </a>
             <button
